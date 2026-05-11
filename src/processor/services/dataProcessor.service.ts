@@ -44,7 +44,7 @@ export class DataProcessorService {
     try {
       const hash = Utils.generateHash(job);
       succeeded = true;
-if (Math.random() < 0.33) throw new Error("Random error");
+
       this.logger.log(
         `REQ_ID_${requestId} : CPU processing completed at ${Date.now() - startAt}ms for data count ${job.id}`,
       );
@@ -291,8 +291,7 @@ if (Math.random() < 0.33) throw new Error("Random error");
         `RETRY_REQ_ID_${requestId} : Data processing done for count ${job.id} at ${startAt}ms`,
       );
 
-      if (Math.floor(Math.random() * 2) === 0) throw new Error("Random retry error ");
-
+      
       await this.collection.updateOne(
         { requestId: job.requestId },
         {
